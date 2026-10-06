@@ -1,22 +1,40 @@
-const express = require('express');
-const path = require('path');
+const http = require('http');
+const https = require('https');
 
-const app = express();
 const PORT = process.env.PORT || 3000;
+const TARGET = 'novawater.com';
 
-app.use(express.static(path.join(__dirname), {
-  maxAge: '1d',
-  setHeaders: (res, filePath) => {
-    if (filePath.endsWith('.html')) {
-      res.setHeader('Cache-Control', 'no-cache');
+const server = http.createServer((req, res) => {
+  const options = {
+    hostname: TARGET,
+    port: 443,
+    path: req.url,
+    method: req.method,
+    headers: {
+      ...req.headers,
+      host: TARGET,
+      'accept-encoding': 'identity'
     }
-  }
-}));
+  };
+  delete options.headers['connection'];
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  const proxy = https.request(options, (proxyRes) => {
+    const headers = { ...proxyRes.headers };
+    delete headers['content-security-policy'];
+    delete headers['x-frame-options'];
+    delete headers['strict-transport-security'];
+    res.writeHead(proxyRes.statusCode, headers);
+    proxyRes.pipe(res);
+  });
+
+  proxy.on('error', (err) => {
+    res.writeHead(502);
+    res.end('Bad Gateway');
+  });
+
+  req.pipe(proxy);
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Proxy server running on port ${PORT}`);
 });
