@@ -1,111 +1,71 @@
 const http = require('http');
 const https = require('https');
-const zlib = require('zlib');
 
 const PORT = process.env.PORT || 3000;
 const TARGET = 'novawater.com';
-const MAGENTO = 'novacp.novawater.com';
+const BACKEND = 'novacp.novawater.com';
 
-function doProxy(hostname, proxyPath, req, res, rewriteBody) {
+function proxy(targetHost, targetPath, req, res) {
   const options = {
-    hostname,
+    hostname: targetHost,
     port: 443,
-    path: proxyPath,
+    path: targetPath,
     method: req.method,
     headers: {
       ...req.headers,
-      host: hostname,
-      'accept-encoding': 'gzip, deflate',
+      host: targetHost,
       origin: 'https://novawater.com',
-      referer: 'https://novawater.com/'
+      referer: 'https://novawater.com/',
+      'x-forwarded-host': targetHost
     }
   };
   delete options.headers['connection'];
+  delete options.headers['accept-encoding'];
 
-  const proxy = https.request(options, (proxyRes) => {
-    const contentType = (proxyRes.headers['content-type'] || '');
-    const needsRewrite = rewriteBody && (contentType.includes('text/html') || contentType.includes('javascript') || contentType.includes('json'));
-
-    const headers = { ...proxyRes.headers };
-    delete headers['content-security-policy'];
-    delete headers['content-security-policy-report-only'];
-    delete headers['x-frame-options'];
-    delete headers['strict-transport-security'];
-    headers['access-control-allow-origin'] = '*';
-    headers['access-control-allow-methods'] = 'GET, POST, OPTIONS, PUT, DELETE';
-    headers['access-control-allow-headers'] = '*';
-
-    if (!needsRewrite) {
-      delete headers['content-encoding'];
-      res.writeHead(proxyRes.statusCode, headers);
-      const encoding = proxyRes.headers['content-encoding'];
-      if (encoding === 'gzip') proxyRes.pipe(zlib.createGunzip()).pipe(res);
-      else if (encoding === 'deflate') proxyRes.pipe(zlib.createInflate()).pipe(res);
-      else proxyRes.pipe(res);
-      return;
-    }
-
-    const chunks = [];
-    let stream = proxyRes;
-    const encoding = proxyRes.headers['content-encoding'];
-    if (encoding === 'gzip') stream = proxyRes.pipe(zlib.createGunzip());
-    else if (encoding === 'deflate') stream = proxyRes.pipe(zlib.createInflate());
-
-    stream.on('data', (c) => chunks.push(c));
-    stream.on('end', () => {
-      let body = Buffer.concat(chunks).toString('utf8');
-      const actualHost = req.headers['host'] || '';
-      const actualOrigin = 'https://' + actualHost;
-
-      if (contentType.includes('text/html')) {
-        body = body.replace(/https:\/\/novacp\.novawater\.com\//g, actualOrigin + '/_backend/');
-        body = body.replace(/https:\/\/novacp\.novawater\.com/g, actualOrigin + '/_backend');
-      }
-
-      delete headers['content-encoding'];
-      headers['content-length'] = Buffer.byteLength(body);
-      res.writeHead(proxyRes.statusCode, headers);
-      res.end(body);
-    });
-    stream.on('error', () => { res.writeHead(502); res.end('Error'); });
+  const p = https.request(options, (r) => {
+    const h = { ...r.headers };
+    delete h['content-security-policy'];
+    delete h['content-security-policy-report-only'];
+    delete h['x-frame-options'];
+    delete h['strict-transport-security'];
+    delete h['content-encoding'];
+    h['access-control-allow-origin'] = '*';
+    h['access-control-allow-methods'] = 'GET,POST,OPTIONS,PUT,DELETE';
+    h['access-control-allow-headers'] = '*';
+    h['access-control-allow-credentials'] = 'true';
+    res.writeHead(r.statusCode, h);
+    r.pipe(res);
   });
 
-  proxy.on('error', () => { res.writeHead(502); res.end('Bad Gateway'); });
-  req.pipe(proxy);
+  p.on('error', () => { res.writeHead(502); res.end('Bad Gateway'); });
+  req.pipe(p);
 }
 
-const server = http.createServer((req, res) => {
+http.createServer((req, res) => {
+  // CORS preflight
   if (req.method === 'OPTIONS') {
     res.writeHead(204, {
       'access-control-allow-origin': '*',
-      'access-control-allow-methods': 'GET, POST, OPTIONS, PUT, DELETE',
+      'access-control-allow-methods': 'GET,POST,OPTIONS,PUT,DELETE',
       'access-control-allow-headers': '*',
       'access-control-max-age': '86400'
     });
-    res.end();
-    return;
+    return res.end();
   }
 
-  // Proxy Magento backend API calls
+  // Proxy Magento backend
   if (req.url.startsWith('/_backend/')) {
-    const backendPath = req.url.replace('/_backend', '');
-    doProxy(MAGENTO, backendPath, req, res, false);
-    return;
+    return proxy(BACKEND, req.url.replace('/_backend', ''), req, res);
   }
 
-  // Fix _next/data landing path
-  let proxyPath = req.url;
-  proxyPath = proxyPath.replace(
-    /(\/_next\/data\/[^/]+\/[^/]+\/landings\/)([^/]+)(\/)/,
-    '$1novawater.com$3'
-  );
-  if (proxyPath.match(/^\/[a-z]{2}\/landings\//) && !proxyPath.includes('novawater.com')) {
-    proxyPath = proxyPath.replace(/(\/landings\/)([^/]+)(\/)/, '$1novawater.com$3');
+  // Fix _next/data landing paths
+  let path = req.url;
+  const dataMatch = path.match(/(\/_next\/data\/[^/]+\/[^/]+\/landings\/)([^/]+)(\/.*)/);
+  if (dataMatch && dataMatch[2] !== 'novawater.com') {
+    path = dataMatch[1] + 'novawater.com' + dataMatch[3];
   }
 
-  doProxy(TARGET, proxyPath, req, res, true);
-});
+  // Proxy to novawater.com
+  proxy(TARGET, path, req, res);
 
-server.listen(PORT, '0.0.0.0', () => {
-  console.log(`Proxy running on port ${PORT}`);
-});
+}).listen(PORT, '0.0.0.0', () => console.log(`Port ${PORT}`));
