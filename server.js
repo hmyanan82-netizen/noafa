@@ -50,6 +50,7 @@ function fetchAndRewrite(hostname, urlPath, req, res, transform) {
     stream.on('end', () => {
       let body = Buffer.concat(chunks).toString('utf8');
       body = transform(body);
+      delete headers['transfer-encoding'];
       headers['content-length'] = Buffer.byteLength(body);
       res.writeHead(upstream.statusCode, headers);
       res.end(body);
