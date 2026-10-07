@@ -21,6 +21,13 @@ function fetchAndRewrite(hostname, urlPath, req, res, transform) {
   };
   delete options.headers['connection'];
   delete options.headers['accept-encoding'];
+  delete options.headers['x-forwarded-host'];
+  delete options.headers['x-forwarded-for'];
+  delete options.headers['x-forwarded-proto'];
+  delete options.headers['x-real-ip'];
+  delete options.headers['cf-connecting-ip'];
+  delete options.headers['cf-ray'];
+  delete options.headers['cf-visitor'];
 
   const p = https.request(options, (upstream) => {
     const headers = { ...upstream.headers };
@@ -91,6 +98,10 @@ http.createServer((req, res) => {
     return fetchAndRewrite(TARGET, req.url, req, res, (body) => {
       body = body.replace(/https:\/\/novacp\.novawater\.com\//g, actualOrigin + '/_backend/');
       body = body.replace(/https:\/\/novacp\.novawater\.com/g, actualOrigin + '/_backend');
+      if (actualHost && actualHost !== TARGET) {
+        const esc = actualHost.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        body = body.replace(new RegExp('"landing":"' + esc + '"', 'g'), '"landing":"novawater.com"');
+      }
       return body;
     });
   }
