@@ -83,9 +83,8 @@ ul{list-style:none}
 .subscribe-form button{background:#61A2E6;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:14px;font-weight:600}
 
 /* FOOTER */
-.footer{background:#D7EEFF;padding:32px 32px 0}
-.footer-inner{max-width:1440px;margin:0 auto;display:flex;direction:ltr;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.f-col{direction:rtl}
+.footer{background:#D7EEFF;padding:32px 32px 0;position:relative}
+.footer-inner{max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-bottom:48px}
 .f-col .f-logo img{height:70px}
 .f-col h4{font-size:13px;font-weight:700;margin-bottom:10px;color:#070707}
 .f-col ul li{margin-bottom:6px}
@@ -95,11 +94,13 @@ ul{list-style:none}
 .f-col .apps{display:flex;flex-direction:column;gap:6px;margin-top:6px}
 .f-col .apps a img{height:32px;width:auto}
 .f-col .apps-label{font-size:12px;color:#555;margin-bottom:6px;display:block}
-.footer-bottom{background:#5191cd;padding:12px 32px;margin-top:24px}
-.footer-bottom-inner{max-width:1440px;margin:0 auto;display:flex;direction:ltr;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.f-cards{display:flex;gap:16px;align-items:center;justify-content:flex-end;padding:0 32px 12px}
+.f-cards img{height:24px;border-radius:3px}
+.footer-bottom{background:#5191cd;padding:12px 32px}
+.footer-bottom-inner{max-width:1440px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .f-copy{font-size:12px;color:#fff}
-.f-cards{display:flex;gap:10px;align-items:center}
-.f-cards img{height:22px;border-radius:3px}
+.f-socials{display:flex;gap:8px}
+.f-socials a img{width:28px;height:28px;border-radius:50%}
 
 /* RESPONSIVE */
 @media(max-width:1100px){
@@ -111,7 +112,7 @@ ul{list-style:none}
   .panel-text{padding:32px 24px}
   .panel-text h2{font-size:26px}
   .panel-img{min-height:280px}
-  .footer-inner{flex-wrap:wrap}.footer-inner .f-col{min-width:140px;flex:1}
+  .footer-inner .f-col{min-width:140px}
 }
 @media(max-width:768px){
   .header-inner{padding:8px 16px}
@@ -300,17 +301,26 @@ ul{list-style:none}
       </div>
     </div>
   </div>
+  <div class="f-cards">
+    <img src="https://novacp.novawater.com/media/mada_1.jpg" alt="Mada">
+    <img src="https://novacp.novawater.com/media/cmsblock/images/STCPay_logo_1.png" alt="STC Pay">
+    <img src="https://novacp.novawater.com/media/master.jpg" alt="Mastercard">
+    <img src="https://novacp.novawater.com/media/visa.jpg" alt="Visa">
+    <img src="https://novacp.novawater.com/media/applepay.jpg" alt="Apple Pay">
+    <img src="https://novacp.novawater.com/media/cod.jpg" alt="COD">
+  </div>
   <div class="footer-bottom">
     <div class="footer-bottom-inner">
-      <div class="f-copy">© 2026 نوفا. جميع الحقوق محفوظة.</div>
-      <div class="f-cards">
-        <img src="https://novacp.novawater.com/media/mada_1.jpg" alt="Mada">
-        <img src="https://novacp.novawater.com/media/cmsblock/images/STCPay_logo_1.png" alt="STC Pay">
-        <img src="https://novacp.novawater.com/media/master.jpg" alt="Mastercard">
-        <img src="https://novacp.novawater.com/media/visa.jpg" alt="Visa">
-        <img src="https://novacp.novawater.com/media/applepay.jpg" alt="Apple Pay">
-        <img src="https://novacp.novawater.com/media/cod.jpg" alt="COD">
+      <div class="f-socials">
+        <a href="https://www.facebook.com/NovaWaterKSA" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/facebook.png" alt="Facebook"></a>
+        <a href="https://www.instagram.com/novawaterksa/" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Instagram.png" alt="Instagram"></a>
+        <a href="https://www.youtube.com/@novawater_ksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Youtube.png" alt="YouTube"></a>
+        <a href="https://x.com/Novawaterksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Twitter.png" alt="X"></a>
+        <a href="https://www.tiktok.com/@novawaterksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/1.png" alt="TikTok"></a>
+        <a href="https://www.linkedin.com/company/novawaterksa/" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/2.png" alt="LinkedIn"></a>
+        <a href="https://www.snapchat.com/add/novawater.ksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/3.png" alt="Snapchat"></a>
       </div>
+      <div class="f-copy">© 2026 نوفا. جميع الحقوق محفوظة.</div>
     </div>
   </div>
 </footer>
