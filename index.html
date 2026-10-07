@@ -83,24 +83,30 @@ ul{list-style:none}
 .subscribe-form button{background:#61A2E6;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:14px;font-weight:600}
 
 /* FOOTER */
-.footer{background:#D7EEFF;padding:32px 32px 0;position:relative}
-.footer-inner{max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-bottom:48px}
-.f-col .f-logo img{height:70px}
-.f-col h4{font-size:13px;font-weight:700;margin-bottom:10px;color:#070707}
-.f-col ul li{margin-bottom:6px}
-.f-col ul li a{font-size:12px;color:#555;transition:color .2s}
-.f-col ul li a:hover{color:#005eaa}
-.f-col .contact{font-size:12px;color:#555;line-height:1.7}
-.f-col .apps{display:flex;flex-direction:column;gap:6px;margin-top:6px}
-.f-col .apps a img{height:32px;width:auto}
-.f-col .apps-label{font-size:12px;color:#555;margin-bottom:6px;display:block}
-.f-cards{display:flex;gap:16px;align-items:center;justify-content:flex-end;padding:0 32px 12px}
-.f-cards img{height:24px;border-radius:3px}
-.footer-bottom{background:#5191cd;padding:12px 32px}
-.footer-bottom-inner{max-width:1440px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.f-copy{font-size:12px;color:#fff}
-.f-socials{display:flex;gap:8px}
-.f-socials a img{width:28px;height:28px;border-radius:50%}
+.footer{background:#4a90c4;color:#fff;padding:40px 24px 0;text-align:center}
+.footer-logo{margin-bottom:28px}
+.footer-logo img{height:60px}
+.f-section{border-top:1px solid rgba(255,255,255,.3)}
+.f-section:last-of-type{border-bottom:1px solid rgba(255,255,255,.3)}
+.f-section-header{display:flex;align-items:center;justify-content:space-between;padding:16px 0;cursor:pointer;background:none;border:none;color:#fff;font-family:'Cairo',sans-serif;font-size:16px;font-weight:700;width:100%}
+.f-section-header svg{width:20px;height:20px;fill:#fff;transition:transform .3s}
+.f-section-header.open svg{transform:rotate(180deg)}
+.f-section-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.f-section-body.open{max-height:300px}
+.f-section-body ul{padding:0 0 12px}
+.f-section-body li{margin-bottom:8px}
+.f-section-body a{color:rgba(255,255,255,.85);font-size:14px}
+.f-section-body a:hover{color:#fff}
+.f-section-body .contact{font-size:14px;color:rgba(255,255,255,.85);line-height:1.8;padding-bottom:12px;text-align:right}
+.f-apps{padding:28px 0;text-align:center}
+.f-apps-title{font-size:16px;font-weight:700;margin-bottom:16px}
+.f-apps-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.f-apps-row a img{height:44px;border-radius:8px}
+.f-cards{display:flex;justify-content:center;gap:16px;padding:24px 0;flex-wrap:wrap}
+.f-cards img{height:28px;border-radius:4px;background:#fff;padding:2px 4px}
+.f-socials{display:flex;justify-content:center;gap:12px;padding:20px 0 28px}
+.f-socials a img{width:36px;height:36px;border-radius:50%}
+.f-copy{font-size:12px;color:rgba(255,255,255,.7);padding:12px 0;border-top:1px solid rgba(255,255,255,.2)}
 
 /* RESPONSIVE */
 @media(max-width:1100px){
@@ -112,7 +118,6 @@ ul{list-style:none}
   .panel-text{padding:32px 24px}
   .panel-text h2{font-size:26px}
   .panel-img{min-height:280px}
-  .footer-inner .f-col{min-width:140px}
 }
 @media(max-width:768px){
   .header-inner{padding:8px 16px}
@@ -123,14 +128,11 @@ ul{list-style:none}
   .products-marquee .p-item img{height:160px}
   .panel-text h2{font-size:22px}
   .panel-img img{max-height:240px}
-  .footer-inner .f-col{min-width:45%}
   .subscribe-inner{flex-direction:column;align-items:stretch}
   .subscribe-form input{width:100%;flex:1}
 }
 @media(max-width:480px){
   .topbar{font-size:11px;padding:8px 12px}
-  .footer-inner .f-col{min-width:100%}
-  .footer-bottom-inner{flex-direction:column;align-items:center;text-align:center}
 }
 </style>
 </head>
@@ -268,39 +270,34 @@ ul{list-style:none}
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-inner">
-    <div class="f-col"><div class="f-logo"><img src="https://novacp.novawater.com/pub/media/cmsblock/images/layer.png" alt="Nova"></div></div>
-    <div class="f-col">
-      <h4>عن نوفا</h4>
-      <ul><li><a href="javascript:void(0)">معلومات عنا</a></li><li><a href="javascript:void(0)">الأخبار</a></li></ul>
-    </div>
-    <div class="f-col">
-      <h4>المنتجات</h4>
-      <ul><li><a href="javascript:void(0)">المجموعة الأساسية</a></li><li><a href="javascript:void(0)">مياه نوڤا الزجاجية</a></li><li><a href="javascript:void(0)">مجموعة مياه نوڤا الفوارة</a></li><li><a href="javascript:void(0)">المجموعة الكبيرة</a></li></ul>
-    </div>
-    <div class="f-col">
-      <h4>مركز المساعدة</h4>
-      <ul><li><a href="javascript:void(0)">الأسئلة الشائعة</a></li><li><a href="javascript:void(0)">الشروط والأحكام</a></li></ul>
-    </div>
-    <div class="f-col">
-      <h4>اتصل بنا</h4>
-      <div class="contact">
-        <p><a href="javascript:void(0)">أرسل ملاحظاتك</a></p>
-        <p>شارع الصحابة, حي المونسية, الرياض 13249, المملكة العربية السعودية</p>
-        <p style="direction:ltr;text-align:right;margin-top:4px">9200 33 445</p>
-        <p>info@novawater.com</p>
-      </div>
-    </div>
-    <div class="f-col">
-      <h4>حافظ على ترطيبك</h4>
-      <span class="apps-label">حمّل تطبيق مياه نوڤا اطلب الآن!</span>
-      <div class="apps">
-        <a href="https://onelink.to/6pnjf7" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/cmsblock/images/App_Store_1.png" alt="App Store"></a>
-        <a href="https://onelink.to/6pnjf7" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/cmsblock/images/Google_Play_1_1.png" alt="Google Play"></a>
-        <a href="https://onelink.to/6pnjf7" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/cmsblock/images/AppGallery_1.png" alt="AppGallery"></a>
-      </div>
+  <div class="footer-logo"><img src="https://novacp.novawater.com/pub/media/cmsblock/images/Group.png" alt="Nova"></div>
+
+  <div class="f-section">
+    <button class="f-section-header" onclick="toggleSection(this)"><span>عن نوفا</span><svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg></button>
+    <div class="f-section-body"><ul><li><a href="javascript:void(0)">معلومات عنا</a></li><li><a href="javascript:void(0)">الأخبار</a></li></ul></div>
+  </div>
+  <div class="f-section">
+    <button class="f-section-header" onclick="toggleSection(this)"><span>المنتجات</span><svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg></button>
+    <div class="f-section-body"><ul><li><a href="javascript:void(0)">المجموعة الأساسية</a></li><li><a href="javascript:void(0)">مياه نوڤا الزجاجية</a></li><li><a href="javascript:void(0)">مجموعة مياه نوڤا الفوارة</a></li><li><a href="javascript:void(0)">المجموعة الكبيرة</a></li></ul></div>
+  </div>
+  <div class="f-section">
+    <button class="f-section-header" onclick="toggleSection(this)"><span>مركز المساعدة</span><svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg></button>
+    <div class="f-section-body"><ul><li><a href="javascript:void(0)">الأسئلة الشائعة</a></li><li><a href="javascript:void(0)">الشروط والأحكام</a></li></ul></div>
+  </div>
+  <div class="f-section">
+    <button class="f-section-header" onclick="toggleSection(this)"><span>اتصل بنا</span><svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg></button>
+    <div class="f-section-body"><div class="contact"><p><a href="javascript:void(0)">أرسل ملاحظاتك</a></p><p>شارع الصحابة, حي المونسية, الرياض 13249, المملكة العربية السعودية</p><p style="direction:ltr;text-align:right;margin-top:4px">9200 33 445</p><p>info@novawater.com</p></div></div>
+  </div>
+
+  <div class="f-apps">
+    <div class="f-apps-title">حافظ على ترطيبك! حمّل تطبيق مياه نوڤا اطلب الآن</div>
+    <div class="f-apps-row">
+      <a href="https://onelink.to/6pnjf7" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/cmsblock/images/App_Store_1.png" alt="App Store"></a>
+      <a href="https://onelink.to/6pnjf7" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/cmsblock/images/Google_Play_1_1.png" alt="Google Play"></a>
+      <a href="https://onelink.to/6pnjf7" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/cmsblock/images/AppGallery_1.png" alt="AppGallery"></a>
     </div>
   </div>
+
   <div class="f-cards">
     <img src="https://novacp.novawater.com/media/mada_1.jpg" alt="Mada">
     <img src="https://novacp.novawater.com/media/cmsblock/images/STCPay_logo_1.png" alt="STC Pay">
@@ -309,20 +306,18 @@ ul{list-style:none}
     <img src="https://novacp.novawater.com/media/applepay.jpg" alt="Apple Pay">
     <img src="https://novacp.novawater.com/media/cod.jpg" alt="COD">
   </div>
-  <div class="footer-bottom">
-    <div class="footer-bottom-inner">
-      <div class="f-socials">
-        <a href="https://www.facebook.com/NovaWaterKSA" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/facebook.png" alt="Facebook"></a>
-        <a href="https://www.instagram.com/novawaterksa/" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Instagram.png" alt="Instagram"></a>
-        <a href="https://www.youtube.com/@novawater_ksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Youtube.png" alt="YouTube"></a>
-        <a href="https://x.com/Novawaterksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Twitter.png" alt="X"></a>
-        <a href="https://www.tiktok.com/@novawaterksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/1.png" alt="TikTok"></a>
-        <a href="https://www.linkedin.com/company/novawaterksa/" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/2.png" alt="LinkedIn"></a>
-        <a href="https://www.snapchat.com/add/novawater.ksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/3.png" alt="Snapchat"></a>
-      </div>
-      <div class="f-copy">© 2026 نوفا. جميع الحقوق محفوظة.</div>
-    </div>
+
+  <div class="f-socials">
+    <a href="https://www.facebook.com/NovaWaterKSA" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/facebook.png" alt="Facebook"></a>
+    <a href="https://www.instagram.com/novawaterksa/" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Instagram.png" alt="Instagram"></a>
+    <a href="https://www.youtube.com/@novawater_ksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Youtube.png" alt="YouTube"></a>
+    <a href="https://x.com/Novawaterksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Twitter.png" alt="X"></a>
+    <a href="https://www.tiktok.com/@novawaterksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/1.png" alt="TikTok"></a>
+    <a href="https://www.linkedin.com/company/novawaterksa/" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/2.png" alt="LinkedIn"></a>
+    <a href="https://www.snapchat.com/add/novawater.ksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/3.png" alt="Snapchat"></a>
   </div>
+
+  <div class="f-copy">© 2026 نوفا. جميع الحقوق محفوظة.</div>
 </footer>
 
 <script>
@@ -330,6 +325,7 @@ var cur=0,slides=document.querySelectorAll('.slide'),dots=document.querySelector
 function goSlide(n){cur=n;document.getElementById('st').style.transform='translateX('+cur*100+'%)';dots.forEach(function(d,i){d.classList.toggle('active',i===cur)})}
 setInterval(function(){goSlide((cur+1)%slides.length)},5000);
 function openPanel(n){document.querySelectorAll('.range-panel').forEach(function(p,i){p.classList.toggle('active',i===n)})}
+function toggleSection(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
 </script>
 </body>
 </html>
