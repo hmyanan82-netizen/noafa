@@ -49,20 +49,15 @@ ul{list-style:none}
 .dot.active{background:#fff;border-color:#fff;transform:scale(1.15)}
 
 /* BEST SELLERS */
-.best-sellers{max-width:1440px;margin:0 auto;padding:56px 32px}
+.best-sellers{padding:56px 0;text-align:center;overflow:hidden}
 .section-title{text-align:center;font-size:28px;font-weight:700;margin-bottom:36px;color:#070707}
-.products-slider{display:flex;gap:0;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 16px}
-.products-slider::-webkit-scrollbar{display:none}
-.p-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:box-shadow .3s,transform .25s;display:flex;flex-direction:column;min-width:280px;max-width:300px;flex-shrink:0;scroll-snap-align:start;margin:0 12px}
-.p-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.12);transform:translateY(-6px)}
-.p-card .p-img{background:#fafafa;padding:24px;display:flex;align-items:center;justify-content:center;aspect-ratio:1}
-.p-card .p-img img{max-height:200px;object-fit:contain}
-.p-card .p-info{padding:16px 20px;flex:1;display:flex;flex-direction:column;gap:8px}
-.p-card .p-name{font-size:14px;font-weight:600;line-height:1.6;color:#070707}
-.p-card .p-price{font-size:18px;font-weight:700;color:#070707}
-.p-card .p-price .cur{font-size:12px;font-weight:500;color:#777;margin-right:4px}
-.p-card .order-btn{display:block;text-align:center;background:#4aaa41;color:#fff;border:none;border-radius:10px;padding:11px;font-size:14px;font-weight:700;width:100%;margin-top:auto;transition:background .2s}
-.p-card .order-btn:hover{background:#3d9536}
+.products-marquee{display:flex;width:max-content;animation:marquee 20s linear infinite}
+.products-marquee:hover{animation-play-state:paused}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(50%)}}
+.products-marquee .p-item{flex-shrink:0;padding:0 24px}
+.products-marquee .p-item img{height:220px;object-fit:contain}
+.best-sellers .order-btn{display:inline-block;margin-top:32px;background:#4aaa41;color:#fff;border:none;border-radius:10px;padding:14px 48px;font-size:16px;font-weight:700;transition:background .2s}
+.best-sellers .order-btn:hover{background:#3d9536}
 
 /* PRODUCT RANGE ACCORDION */
 .range-accordion{display:flex;width:100%;height:800px;overflow:hidden;gap:6px;padding:0 6px}
@@ -126,7 +121,6 @@ ul{list-style:none}
   .panel-text{padding:32px 24px}
   .panel-text h2{font-size:26px}
   .panel-img{min-height:280px}
-  .p-card{min-width:240px}
   .footer-inner{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:768px){
@@ -135,13 +129,8 @@ ul{list-style:none}
   .header-inner{padding:8px 16px}
   .logo img{height:42px}
   .section-title{font-size:22px}
-  .p-card{min-width:220px}
-  .p-card .p-img{padding:14px}
-  .p-card .p-img img{max-height:140px}
-  .p-card .p-info{padding:12px 14px}
-  .p-card .p-name{font-size:13px}
-  .p-card .p-price{font-size:16px}
   .best-sellers{padding:36px 16px}
+  .products-marquee .p-item img{height:160px}
   .panel-text h2{font-size:22px}
   .panel-img img{max-height:240px}
   .footer-inner{grid-template-columns:repeat(2,1fr);gap:24px}
@@ -197,40 +186,17 @@ ul{list-style:none}
 <!-- BEST SELLERS -->
 <section class="best-sellers">
   <h2 class="section-title">الأكثر مبيعاً</h2>
-  <div class="products-slider">
-    <div class="p-card">
-      <div class="p-img"><img src="https://novacp.novawater.com/media/catalog/product/4/0/40x0.33_snd.png" alt="مياه نوفا 330 مل" loading="lazy"></div>
-      <div class="p-info">
-        <div class="p-name">مياه نوفا، كرتون 330 مل، 40 عبوة</div>
-        <div class="p-price"><span class="cur">ر.س</span>21.84</div>
-        <a href="#order" class="order-btn">اطلب الان</a>
-      </div>
-    </div>
-    <div class="p-card">
-      <div class="p-img"><img src="https://novacp.novawater.com/media/catalog/product/2/4/24_1.jpg" alt="مياه نوفا 200 مل" loading="lazy"></div>
-      <div class="p-info">
-        <div class="p-name">مياه نوفا، كرتون 200 مل، 24 عبوة</div>
-        <div class="p-price"><span class="cur">ر.س</span>14.46</div>
-        <a href="#order" class="order-btn">اطلب الان</a>
-      </div>
-    </div>
-    <div class="p-card">
-      <div class="p-img"><img src="https://novacp.novawater.com/media/catalog/product/n/o/nova-water_-550ml-case_-24-bottles_1.jpg" alt="مياه نوفا 550 مل" loading="lazy"></div>
-      <div class="p-info">
-        <div class="p-name">مياه نوفا، كرتون 550 مل، 24 عبوة</div>
-        <div class="p-price"><span class="cur">ر.س</span>18.16</div>
-        <a href="#order" class="order-btn">اطلب الان</a>
-      </div>
-    </div>
-    <div class="p-card">
-      <div class="p-img"><img src="https://novacp.novawater.com/media/catalog/product/g/l/glass_24x250ml00002.png" alt="مياه نوفا زجاج 250 مل" loading="lazy"></div>
-      <div class="p-info">
-        <div class="p-name">مياه نوفا، كرتون 250 مل زجاج، 24 زجاجة</div>
-        <div class="p-price"><span class="cur">ر.س</span>44.95</div>
-        <a href="#order" class="order-btn">اطلب الان</a>
-      </div>
-    </div>
+  <div class="products-marquee">
+    <div class="p-item"><img src="https://novacp.novawater.com/media/catalog/product/4/0/40x0.33_snd.png" alt="330 مل"></div>
+    <div class="p-item"><img src="https://novacp.novawater.com/media/catalog/product/2/4/24_1.jpg" alt="200 مل"></div>
+    <div class="p-item"><img src="https://novacp.novawater.com/media/catalog/product/n/o/nova-water_-550ml-case_-24-bottles_1.jpg" alt="550 مل"></div>
+    <div class="p-item"><img src="https://novacp.novawater.com/media/catalog/product/g/l/glass_24x250ml00002.png" alt="زجاج 250 مل"></div>
+    <div class="p-item"><img src="https://novacp.novawater.com/media/catalog/product/4/0/40x0.33_snd.png" alt="330 مل"></div>
+    <div class="p-item"><img src="https://novacp.novawater.com/media/catalog/product/2/4/24_1.jpg" alt="200 مل"></div>
+    <div class="p-item"><img src="https://novacp.novawater.com/media/catalog/product/n/o/nova-water_-550ml-case_-24-bottles_1.jpg" alt="550 مل"></div>
+    <div class="p-item"><img src="https://novacp.novawater.com/media/catalog/product/g/l/glass_24x250ml00002.png" alt="زجاج 250 مل"></div>
   </div>
+  <a href="#order" class="order-btn">اطلب الان</a>
 </section>
 
 <!-- PRODUCT RANGE ACCORDION -->
