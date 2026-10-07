@@ -18,33 +18,70 @@ const INJECT_SCRIPT = `<script>
     if (!_cache) _cache = window.__NEXT_DATA__ || null;
     return _cache;
   }
+  function mockGraphQL(body) {
+    var nd = getData();
+    var pp = nd && nd.props && nd.props.pageProps;
+    if (pp) {
+      if (body.indexOf('storeConfig') !== -1 && body.indexOf('createEmptyCart') === -1 && pp.storeConfig)
+        return JSON.stringify({data:{storeConfig:pp.storeConfig}});
+      if (body.indexOf('availableStores') !== -1 && pp.storeViews)
+        return JSON.stringify({data:{availableStores:pp.storeViews}});
+      if (body.indexOf('megaMenu') !== -1 && pp.megaMenu)
+        return JSON.stringify({data:{categoryList:pp.megaMenu}});
+      if (body.indexOf('cmsBlocks') !== -1 && pp.cmsBlocks)
+        return JSON.stringify({data:{cmsBlocks:{items:pp.cmsBlocks}}});
+    }
+    if (body.indexOf('createEmptyCart') !== -1)
+      return JSON.stringify({data:{createEmptyCart:"guest-"+Math.random().toString(36).slice(2)}});
+    if (body.indexOf('customerCart') !== -1)
+      return JSON.stringify({data:{customerCart:{id:"guest-"+Math.random().toString(36).slice(2)}}});
+    if (body.indexOf('customer') !== -1 && body.indexOf('firstname') !== -1)
+      return JSON.stringify({data:{customer:null}});
+    return null;
+  }
   var origFetch = window.fetch;
   window.fetch = function(url, opts) {
     if (opts && opts.method === 'POST' && typeof url === 'string' && url.indexOf('graphql') !== -1) {
       try {
         var body = typeof opts.body === 'string' ? opts.body : '';
-        var nd = getData();
-        var pp = nd && nd.props && nd.props.pageProps;
-        if (pp) {
-          if (body.indexOf('storeConfig') !== -1 && body.indexOf('createEmptyCart') === -1 && pp.storeConfig) {
-            return Promise.resolve(new Response(JSON.stringify({data:{storeConfig:pp.storeConfig}}), {status:200, headers:{'content-type':'application/json'}}));
-          }
-          if (body.indexOf('availableStores') !== -1 && pp.storeViews) {
-            return Promise.resolve(new Response(JSON.stringify({data:{availableStores:pp.storeViews}}), {status:200, headers:{'content-type':'application/json'}}));
-          }
-          if (body.indexOf('megaMenu') !== -1 && pp.megaMenu) {
-            return Promise.resolve(new Response(JSON.stringify({data:{categoryList:pp.megaMenu}}), {status:200, headers:{'content-type':'application/json'}}));
-          }
-        }
-        if (body.indexOf('createEmptyCart') !== -1) {
-          return Promise.resolve(new Response(JSON.stringify({data:{createEmptyCart:"guest-" + Math.random().toString(36).slice(2)}}), {status:200, headers:{'content-type':'application/json'}}));
-        }
-        if (body.indexOf('customerCart') !== -1) {
-          return Promise.resolve(new Response(JSON.stringify({data:{customerCart:{id:"guest-" + Math.random().toString(36).slice(2)}}}), {status:200, headers:{'content-type':'application/json'}}));
-        }
+        var mock = mockGraphQL(body);
+        if (mock) return Promise.resolve(new Response(mock, {status:200, headers:{'content-type':'application/json'}}));
       } catch(e) {}
     }
     return origFetch.apply(this, arguments);
+  };
+  var XHROpen = XMLHttpRequest.prototype.open;
+  var XHRSend = XMLHttpRequest.prototype.send;
+  XMLHttpRequest.prototype.open = function(method, url) {
+    this._url = url;
+    this._method = method;
+    return XHROpen.apply(this, arguments);
+  };
+  XMLHttpRequest.prototype.send = function(body) {
+    if (this._method === 'POST' && typeof this._url === 'string' && this._url.indexOf('graphql') !== -1 && typeof body === 'string') {
+      try {
+        var mock = mockGraphQL(body);
+        if (mock) {
+          var self = this;
+          Object.defineProperty(self, 'readyState', {writable:true});
+          Object.defineProperty(self, 'status', {writable:true});
+          Object.defineProperty(self, 'statusText', {writable:true});
+          Object.defineProperty(self, 'responseText', {writable:true});
+          Object.defineProperty(self, 'response', {writable:true});
+          setTimeout(function(){
+            self.readyState = 4;
+            self.status = 200;
+            self.statusText = 'OK';
+            self.responseText = mock;
+            self.response = mock;
+            if (self.onreadystatechange) self.onreadystatechange();
+            if (self.onload) self.onload();
+          }, 0);
+          return;
+        }
+      } catch(e) {}
+    }
+    return XHRSend.apply(this, arguments);
   };
 })();
 </script>`;
