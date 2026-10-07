@@ -8,25 +8,33 @@ const BACKEND = 'novacp.novawater.com';
 
 const INJECT_SCRIPT = `<script>
 (function(){
-  var nd = window.__NEXT_DATA__;
-  if (!nd) return;
-  var sc = nd.props && nd.props.pageProps && nd.props.pageProps.storeConfig;
-  var sv = nd.props && nd.props.pageProps && nd.props.pageProps.storeViews;
-  var mm = nd.props && nd.props.pageProps && nd.props.pageProps.megaMenu;
-  var cb = nd.props && nd.props.pageProps && nd.props.pageProps.cmsBlocks;
+  var _cache = null;
+  function getData() {
+    if (_cache) return _cache;
+    try {
+      var el = document.getElementById('__NEXT_DATA__');
+      if (el) _cache = JSON.parse(el.textContent);
+    } catch(e) {}
+    if (!_cache) _cache = window.__NEXT_DATA__ || null;
+    return _cache;
+  }
   var origFetch = window.fetch;
   window.fetch = function(url, opts) {
     if (opts && opts.method === 'POST' && typeof url === 'string' && url.indexOf('graphql') !== -1) {
       try {
         var body = typeof opts.body === 'string' ? opts.body : '';
-        if (body.indexOf('storeConfig') !== -1 && body.indexOf('createEmptyCart') === -1 && sc) {
-          return Promise.resolve(new Response(JSON.stringify({data:{storeConfig:sc}}), {status:200, headers:{'content-type':'application/json'}}));
-        }
-        if (body.indexOf('availableStores') !== -1 && sv) {
-          return Promise.resolve(new Response(JSON.stringify({data:{availableStores:sv}}), {status:200, headers:{'content-type':'application/json'}}));
-        }
-        if (body.indexOf('megaMenu') !== -1 && mm) {
-          return Promise.resolve(new Response(JSON.stringify({data:{categoryList:mm}}), {status:200, headers:{'content-type':'application/json'}}));
+        var nd = getData();
+        var pp = nd && nd.props && nd.props.pageProps;
+        if (pp) {
+          if (body.indexOf('storeConfig') !== -1 && body.indexOf('createEmptyCart') === -1 && pp.storeConfig) {
+            return Promise.resolve(new Response(JSON.stringify({data:{storeConfig:pp.storeConfig}}), {status:200, headers:{'content-type':'application/json'}}));
+          }
+          if (body.indexOf('availableStores') !== -1 && pp.storeViews) {
+            return Promise.resolve(new Response(JSON.stringify({data:{availableStores:pp.storeViews}}), {status:200, headers:{'content-type':'application/json'}}));
+          }
+          if (body.indexOf('megaMenu') !== -1 && pp.megaMenu) {
+            return Promise.resolve(new Response(JSON.stringify({data:{categoryList:pp.megaMenu}}), {status:200, headers:{'content-type':'application/json'}}));
+          }
         }
         if (body.indexOf('createEmptyCart') !== -1) {
           return Promise.resolve(new Response(JSON.stringify({data:{createEmptyCart:"guest-" + Math.random().toString(36).slice(2)}}), {status:200, headers:{'content-type':'application/json'}}));
