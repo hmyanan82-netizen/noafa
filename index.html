@@ -23,21 +23,12 @@ ul{list-style:none}
 
 /* HEADER */
 .header{background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.08);position:sticky;top:0;z-index:100}
-.header-inner{max-width:1440px;margin:0 auto;display:flex;align-items:center;padding:12px 32px;gap:24px}
+.header-inner{max-width:1440px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 32px}
+.hamburger{background:none;border:none;width:40px;height:40px;display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;cursor:pointer}
+.hamburger span{display:block;width:24px;height:2.5px;background:#070707;border-radius:2px}
 .logo img{height:55px;width:auto}
-.nav-menu{display:flex;align-items:center;gap:28px;margin:0 auto}
-.nav-menu li{position:relative}
-.nav-menu li>a{font-size:15px;font-weight:600;color:#070707;padding:10px 4px;display:block;transition:color .2s;white-space:nowrap}
-.nav-menu li>a:hover{color:#005eaa}
-.nav-menu li .sub{display:none;position:absolute;top:100%;right:0;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.12);border-radius:12px;min-width:200px;padding:8px 0;z-index:50}
-.nav-menu li:hover .sub{display:block}
-.nav-menu li .sub a{display:block;padding:10px 20px;font-size:14px;font-weight:500}
-.nav-menu li .sub a:hover{background:#e0f1fb}
-.header-end{display:flex;align-items:center;gap:12px}
-.lang-btn{background:none;border:none;display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#070707}
-.lang-btn img{width:20px;height:20px;border-radius:50%}
-.mobile-menu-btn{display:none;background:none;border:none;width:40px;height:40px;flex-direction:column;gap:5px;align-items:center;justify-content:center}
-.mobile-menu-btn span{display:block;width:22px;height:2px;background:#070707;border-radius:2px}
+.header-order{background:#4aaa41;color:#fff;border:none;border-radius:10px;padding:10px 28px;font-size:14px;font-weight:700;font-family:'Cairo',sans-serif;transition:background .2s;white-space:nowrap}
+.header-order:hover{background:#3d9536}
 
 /* SLIDER */
 .hero{position:relative;overflow:hidden;background:#eaf4fc}
@@ -124,10 +115,9 @@ ul{list-style:none}
   .footer-inner{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:768px){
-  .nav-menu{display:none}
-  .mobile-menu-btn{display:flex}
   .header-inner{padding:8px 16px}
   .logo img{height:42px}
+  .header-order{padding:8px 18px;font-size:13px}
   .section-title{font-size:22px}
   .best-sellers{padding:36px 16px}
   .products-marquee .p-item img{height:160px}
@@ -152,22 +142,9 @@ ul{list-style:none}
 <!-- HEADER -->
 <header class="header">
   <div class="header-inner">
+    <button class="hamburger"><span></span><span></span><span></span></button>
     <a href="/" class="logo"><img src="https://novacp.novawater.com/media/logo/stores/2/EN_4x.png" alt="Nova Water"></a>
-    <ul class="nav-menu">
-      <li><a href="javascript:void(0)">نوڤا</a></li>
-      <li>
-        <a href="javascript:void(0)">حلول المياه الذكية</a>
-        <div class="sub">
-          <a href="javascript:void(0)">موزعات المياه</a>
-          <a href="javascript:void(0)">الخدمة والصيانة</a>
-        </div>
-      </li>
-      <li><a href="javascript:void(0)">مياه فاخرة مستوردة</a></li>
-    </ul>
-    <div class="header-end">
-      <button class="lang-btn"><img src="https://novacp.novawater.com/media/global/logo/default/EN_1.png" alt="EN"><span>EN</span></button>
-    </div>
-    <button class="mobile-menu-btn"><span></span><span></span><span></span></button>
+    <a href="#order" class="header-order">اطلب الان</a>
   </div>
 </header>
 
