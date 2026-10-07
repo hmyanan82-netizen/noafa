@@ -1,244 +1,797 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نوفا - مياه طبيعية</title>
-<meta name="description" content="Nova Water - مياه نوفا الطبيعية">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nova Water</title>
+<meta name="description" content="Nova Water">
 <link rel="icon" href="https://novacp.novawater.com/media/global/logo/default/image003.png">
+<link rel="preconnect" href="https://novacp.novawater.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Tahoma,sans-serif;color:#070707;background:#fff;direction:rtl}
-a{text-decoration:none;color:inherit}
-img{max-width:100%;height:auto}
-
-.topbar{background:#005eaa;color:#fff;text-align:center;padding:10px 16px;font-size:14px}
-.header{background:#fff;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:100}
-.logo img{height:48px;width:auto}
-.nav{display:flex;gap:28px;align-items:center}
-.nav a{font-size:15px;font-weight:600;color:#070707;transition:color .2s}
-.nav a:hover{color:#005eaa}
-
-.slider{position:relative;overflow:hidden;background:#f0f7fc}
-.slides{display:flex;transition:transform .6s ease;width:200%}
-.slides img{width:50%;display:block;aspect-ratio:1920/780;object-fit:cover}
-.slider-dots{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px}
-.dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer;border:2px solid rgba(255,255,255,.8)}
-.dot.active{background:#fff}
-
-.section{padding:48px 24px;max-width:1200px;margin:0 auto}
-.section-title{font-size:28px;font-weight:700;text-align:center;margin-bottom:32px;color:#070707}
-
-.products{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s;cursor:pointer}
-.card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.12)}
-.card-img{width:100%;aspect-ratio:1;object-fit:contain;background:#f8f8f8;padding:16px}
-.card-body{padding:16px}
-.card-name{font-size:15px;font-weight:600;margin-bottom:8px;line-height:1.5}
-.card-price{font-size:18px;font-weight:700;color:#005eaa}
-.card-curr{font-size:13px;font-weight:400;color:#666;margin-right:4px}
-
-.range{background:#e0f1fb;padding:48px 24px}
-.range-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1200px;margin:0 auto}
-.range-item{border-radius:16px;overflow:hidden;position:relative;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;transition:transform .2s;text-align:center}
-.range-item:hover{transform:scale(1.02)}
-.range-item h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
-.range-item p{font-size:13px;color:rgba(255,255,255,.9);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.range-item img{position:absolute;top:20px;left:50%;transform:translateX(-50%);height:180px;object-fit:contain}
-
-.social-bar{background:#005eaa;color:#fff;padding:40px 24px;text-align:center}
-.social-bar h2{font-size:22px;margin-bottom:16px}
-.socials{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
-.socials a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.15);transition:background .2s}
-.socials a:hover{background:rgba(255,255,255,.3)}
-.socials img{width:24px;height:24px;border-radius:0}
-
-footer{background:#D7EEFF;padding:40px 24px 20px}
-.ft-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:24px}
-.ft-col h4{font-size:15px;font-weight:700;margin-bottom:14px;color:#070707}
-.ft-col ul{list-style:none}
-.ft-col li{margin-bottom:8px}
-.ft-col a{font-size:13px;color:#418edd}
-.ft-col a:hover{text-decoration:underline}
-.ft-logo{margin-bottom:14px}
-.ft-logo img{height:40px}
-.ft-contact{font-size:13px;color:#555;line-height:1.8}
-.ft-apps{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.ft-apps img{height:32px;width:auto}
-.ft-cards{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;padding:16px 24px;background:#D7EEFF}
-.ft-cards img{height:24px;border-radius:3px}
-.ft-bottom{text-align:center;padding:16px;background:#c5e4f9;font-size:13px;color:#555}
-
-@media(max-width:900px){
-  .products{grid-template-columns:repeat(2,1fr);gap:12px}
-  .range-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-  .range-item{min-height:260px}
-  .range-item img{height:120px}
-  .ft-grid{grid-template-columns:repeat(2,1fr)}
+:root {
+  --topbar-bg: #005eaa;
+  --topbar-text: #FFFFFF;
+  --header-bg: #FFFFFF;
+  --header-text: #070707;
+  --primary-bg: #e0f1fb;
+  --btn-bg: #4aaa41;
+  --btn-text: #FFFFFF;
+  --footer-bg: #D7EEFF;
+  --footer-text: #418edd;
+  --footer-bottom-bg: #5191cd;
+  --footer-bottom-text: #FFFFFF;
+  --text-color: #070707;
+  --title-color: #070707;
+  --font: 'Cairo', sans-serif;
 }
-@media(max-width:600px){
-  .header{padding:10px 16px}
-  .logo img{height:36px}
-  .nav{gap:14px}
-  .nav a{font-size:13px}
-  .section{padding:32px 16px}
-  .section-title{font-size:22px}
-  .card-body{padding:10px}
-  .card-name{font-size:13px}
-  .card-price{font-size:15px}
-  .range-item{min-height:220px;padding:16px}
-  .range-item h3{font-size:16px}
-  .range-item img{height:90px}
-  .ft-grid{grid-template-columns:1fr}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font);
+  color: var(--text-color);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; height: auto; }
+button { cursor: pointer; font-family: var(--font); }
+
+/* TOPBAR */
+.topbar {
+  background: var(--topbar-bg);
+  color: var(--topbar-text);
+  text-align: center;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* HEADER */
+.header {
+  background: var(--header-bg);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner {
+  max-width: 1340px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  gap: 16px;
+}
+.logo img { height: 52px; width: auto; }
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.nav-menu li { position: relative; }
+.nav-menu li > a {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--header-text);
+  padding: 8px 0;
+  display: block;
+  transition: color 0.2s;
+}
+.nav-menu li > a:hover { color: var(--topbar-bg); }
+.nav-menu li .submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  min-width: 200px;
+  padding: 8px 0;
+  z-index: 50;
+}
+.nav-menu li:hover .submenu { display: block; }
+.nav-menu li .submenu a {
+  display: block;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.nav-menu li .submenu a:hover { background: var(--primary-bg); }
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.header-actions .lang-btn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--header-text);
+}
+.header-actions .lang-btn img { width: 20px; height: 20px; border-radius: 50%; }
+.header-actions .icon-btn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+.header-actions .icon-btn img { width: 22px; height: 22px; }
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+.mobile-menu-btn span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--header-text);
+  border-radius: 2px;
+}
+
+/* SLIDER */
+.hero-slider {
+  position: relative;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+.slider-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.slide {
+  min-width: 100%;
+  position: relative;
+}
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 1920/780;
+  object-fit: cover;
+}
+.slider-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+.slider-dots .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.slider-dots .dot.active { background: #fff; }
+
+/* BEST SELLERS */
+.best-sellers {
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+.section-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  color: var(--title-color);
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: box-shadow 0.3s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+.product-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+  transform: translateY(-4px);
+}
+.product-card .product-img {
+  background: #f9f9f9;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+}
+.product-card .product-img img {
+  max-height: 200px;
+  object-fit: contain;
+}
+.product-card .product-info {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.product-card .product-name {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text-color);
+  min-height: 42px;
+}
+.product-card .product-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-color);
+}
+.product-card .product-price .currency {
+  font-size: 13px;
+  font-weight: 500;
+  margin-right: 4px;
+}
+.product-card .add-to-cart {
+  display: block;
+  text-align: center;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 100%;
+  margin-top: auto;
+  transition: opacity 0.2s;
+}
+.product-card .add-to-cart:hover { opacity: 0.9; }
+
+/* PRODUCT RANGE */
+.product-range { padding: 48px 0; }
+.range-section {
+  display: flex;
+  align-items: center;
+  min-height: 500px;
+  overflow: hidden;
+}
+.range-section:nth-child(even) { flex-direction: row-reverse; }
+.range-content {
+  flex: 1;
+  padding: 40px 60px;
+}
+.range-content h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.range-content p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 16px;
+}
+.range-content .range-btn {
+  display: inline-block;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  margin-top: 16px;
+  transition: opacity 0.2s;
+}
+.range-content .range-btn:hover { opacity: 0.9; }
+.range-features {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+.range-features img { width: 80px; height: auto; }
+.range-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  min-height: 400px;
+}
+.range-image img {
+  max-height: 360px;
+  object-fit: contain;
+}
+
+/* SUBSCRIBE */
+.subscribe-section {
+  background: var(--primary-bg);
+  padding: 48px 24px;
+}
+.subscribe-inner {
+  max-width: 1340px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.subscribe-social h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.social-icons {
+  display: flex;
+  gap: 12px;
+}
+.social-icons a img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+.social-icons a:hover img { transform: scale(1.1); }
+.subscribe-form h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.subscribe-form .input-group {
+  display: flex;
+  gap: 8px;
+}
+.subscribe-form input {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-family: var(--font);
+  width: 280px;
+  outline: none;
+}
+.subscribe-form input:focus { border-color: var(--topbar-bg); }
+.subscribe-form button {
+  background: #61A2E6;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* FOOTER */
+.footer {
+  background: var(--footer-bg);
+  padding: 48px 24px 0;
+}
+.footer-inner {
+  max-width: 1340px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr repeat(4, auto) 1fr;
+  gap: 32px;
+}
+.footer-col .footer-logo { margin-bottom: 16px; }
+.footer-col .footer-logo img { height: 80px; }
+.footer-col h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-color);
+}
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a {
+  font-size: 13px;
+  color: #555;
+  transition: color 0.2s;
+}
+.footer-col ul li a:hover { color: var(--topbar-bg); }
+.footer-col .contact-info {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.7;
+}
+.footer-col .app-downloads {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+.footer-col .app-downloads a img { height: 36px; width: auto; }
+.footer-bottom {
+  background: var(--footer-bottom-bg);
+  padding: 16px 24px;
+  margin-top: 32px;
+}
+.footer-bottom-inner {
+  max-width: 1340px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-copyright {
+  font-size: 13px;
+  color: var(--footer-bottom-text);
+}
+.footer-cards {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.footer-cards img {
+  height: 24px;
+  width: auto;
+  border-radius: 4px;
+}
+.footer-socials {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.footer-socials a img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { grid-template-columns: repeat(3, 1fr); }
+  .range-section { flex-direction: column !important; min-height: auto; }
+  .range-content { padding: 32px 24px; }
+  .range-image { padding: 24px; min-height: auto; }
+}
+@media (max-width: 768px) {
+  .nav-menu { display: none; }
+  .mobile-menu-btn { display: flex; }
+  .header-inner { padding: 8px 16px; }
+  .logo img { height: 40px; }
+  .section-title { font-size: 22px; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .product-card .product-img { padding: 12px; }
+  .product-card .product-img img { max-height: 140px; }
+  .product-card .product-info { padding: 12px; }
+  .product-card .product-name { font-size: 13px; min-height: 36px; }
+  .product-card .product-price { font-size: 16px; }
+  .range-content h2 { font-size: 24px; }
+  .range-image img { max-height: 260px; }
+  .footer-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .subscribe-inner { flex-direction: column; align-items: stretch; }
+  .subscribe-form input { width: 100%; flex: 1; }
+  .best-sellers { padding: 32px 16px; }
+  .hero-slider .slide img { aspect-ratio: 16/7; }
+}
+@media (max-width: 480px) {
+  .topbar { font-size: 11px; padding: 6px 12px; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer-bottom-inner { flex-direction: column; align-items: center; text-align: center; }
 }
 </style>
 </head>
 <body>
 
-<div class="topbar">خصم إضافي 10% عند الدفع الإلكتروني، والتوصيل مجاناً للمشتريات بقيمة 150 ريال وأكثر</div>
+<!-- TOPBAR -->
+<div class="topbar">
+  خصم إضافي 10% عند الدفع الإلكتروني، والتوصيل مجاناً للمشتريات بقيمة 150 ريال وأكثر
+</div>
 
+<!-- HEADER -->
 <header class="header">
-  <a href="/" class="logo"><img src="https://novacp.novawater.com/media/logo/stores/2/EN_4x.png" alt="نوفا"></a>
-  <nav class="nav">
-    <a href="https://novawater.com/ar/nova-water.html">نوڤا</a>
-    <a href="https://novawater.com/ar/water-solutions.html">حلول المياه الذكية</a>
-    <a href="https://novawater.com/ar/imported-products.html">مياه فاخرة مستوردة</a>
-  </nav>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="https://novacp.novawater.com/media/logo/stores/2/EN_4x.png" alt="Nova Water" loading="eager">
+    </a>
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="javascript:void(0)">نوڤا</a></li>
+        <li>
+          <a href="javascript:void(0)">حلول المياه الذكية</a>
+          <div class="submenu">
+            <a href="javascript:void(0)">موزعات المياه</a>
+            <a href="javascript:void(0)">الخدمة والصيانة</a>
+          </div>
+        </li>
+        <li><a href="javascript:void(0)">مياه فاخرة مستوردة</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-btn">
+        <img src="https://novacp.novawater.com/media/global/logo/default/EN_1.png" alt="EN">
+        <span>EN</span>
+      </button>
+      <button class="icon-btn">
+        <img src="https://novacp.novawater.com/media/global/logo/default/Icon.png" alt="Cart">
+      </button>
+    </div>
+    <button class="mobile-menu-btn" onclick="this.classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </header>
 
-<div class="slider" id="slider">
-  <div class="slides" id="slides">
-    <img src="https://novacp.novawater.com/media/SnaptecBanner/icelandic_KV_Web_Banner_W-1920pix_x_H-780pix_A_E-01.jpg" alt="Icelandic">
-    <img src="https://novacp.novawater.com/media/SnaptecBanner/NOVA_FSW_New_Hand_KV_Web_Banner_W-1920pix_x_H-780pix_A_E_Ara_1.jpg" alt="Nova">
+<!-- HERO SLIDER -->
+<section class="hero-slider">
+  <div class="slider-track" id="sliderTrack">
+    <div class="slide">
+      <a href="#order">
+        <img src="https://novacp.novawater.com/media/SnaptecBanner/icelandic_KV_Web_Banner_W-1920pix_x_H-780pix_A_E-01.jpg" alt="Icelandic" loading="eager" width="1920" height="780">
+      </a>
+    </div>
+    <div class="slide">
+      <img src="https://novacp.novawater.com/media/SnaptecBanner/NOVA_FSW_New_Hand_KV_Web_Banner_W-1920pix_x_H-780pix_A_E_Ara_1.jpg" alt="Jizan" loading="eager" width="1920" height="780">
+    </div>
   </div>
   <div class="slider-dots">
-    <span class="dot active" onclick="goSlide(0)"></span>
-    <span class="dot" onclick="goSlide(1)"></span>
+    <button class="dot active" onclick="goSlide(0)"></button>
+    <button class="dot" onclick="goSlide(1)"></button>
   </div>
-</div>
+</section>
 
-<section class="section">
+<!-- BEST SELLERS -->
+<section class="best-sellers">
   <h2 class="section-title">الأكثر مبيعاً</h2>
-  <div class="products">
-    <a class="card" href="https://novawater.com/ar/690091-nova-water-330ml-case-40-bottles.html">
-      <img class="card-img" src="https://novacp.novawater.com/media/catalog/product/4/0/40x0.33_snd.png" alt="مياه نوفا 330 مل">
-      <div class="card-body"><div class="card-name">مياه نوفا، كرتون 330 مل، 40 عبوة</div><div class="card-price">21.84 <span class="card-curr">ر.س</span></div></div>
-    </a>
-    <a class="card" href="https://novawater.com/ar/690063-nova-water-200ml-case-24-bottles.html">
-      <img class="card-img" src="https://novacp.novawater.com/media/catalog/product/2/4/24_1.jpg" alt="مياه نوفا 200 مل">
-      <div class="card-body"><div class="card-name">مياه نوفا، كرتون 200 مل، 24 عبوة</div><div class="card-price">14.46 <span class="card-curr">ر.س</span></div></div>
-    </a>
-    <a class="card" href="https://novawater.com/ar/690092-nova-water-550ml-case-24-bottles.html">
-      <img class="card-img" src="https://novacp.novawater.com/media/catalog/product/n/o/nova-water_-550ml-case_-24-bottles_1.jpg" alt="مياه نوفا 550 مل">
-      <div class="card-body"><div class="card-name">مياه نوفا، كرتون 550 مل، 24 عبوة</div><div class="card-price">18.16 <span class="card-curr">ر.س</span></div></div>
-    </a>
-    <a class="card" href="https://novawater.com/ar/690010-nova-water-250ml-glass-case-24-glasses.html">
-      <img class="card-img" src="https://novacp.novawater.com/media/catalog/product/g/l/glass_24x250ml00002.png" alt="مياه نوفا زجاج">
-      <div class="card-body"><div class="card-name">مياه نوفا، كرتون 250 مل زجاج، 24 زجاجة</div><div class="card-price">44.95 <span class="card-curr">ر.س</span></div></div>
-    </a>
-  </div>
-</section>
+  <div class="products-grid">
 
-<section class="range">
-  <h2 class="section-title">مجموعة منتجاتنا</h2>
-  <div class="range-grid">
-    <a href="https://novawater.com/ar/new-products.html" class="range-item" style="background:#A0D5F4">
-      <img src="https://novacp.novawater.com/media/everydayRangeBlue_1.png" alt="المجموعة الأساسية">
-      <h3>المجموعة الأساسية</h3>
-      <p>تضم جميع الزجاجات البلاستيكية عبوات عملية سهلة الفتح متعددة، فردية أو مثالية في الجمعات</p>
-    </a>
-    <a href="https://novawater.com/ar/new-products.html" class="range-item" style="background:#C5BCBF">
-      <img src="https://novacp.novawater.com/media/glassStillRange_1.png" alt="مياه نوڤا الزجاجية">
-      <h3>مياه نوڤا الزجاجية</h3>
-      <p>عبوات زجاجية فاخرة ورائعة تعكس بحضورها الرقي والفخامة لتستمتع بشعور استثنائي</p>
-    </a>
-    <a href="https://novawater.com/ar/new-products.html" class="range-item" style="background:#CFAD66">
-      <img src="https://novacp.novawater.com/media/ar.png" alt="مجموعة مياه نوڤا الفوارة">
-      <h3>مياه نوڤا الفوارة</h3>
-      <p>مياه فوارة منعشة بنكهات فريدة: ليمون ونعناع، فراولة، وخوخ، بدون سكر مضاف</p>
-    </a>
-    <a href="https://novawater.com/ar/new-products.html" class="range-item" style="background:#5191CE">
-      <img src="https://novacp.novawater.com/media/bigFormatRange_1.png" alt="المجموعة الكبيرة">
-      <h3>المجموعة الكبيرة</h3>
-      <p>عبوات عملية مناسبة للبيت أو المكتب تستخدم لمرة واحدة فقط! سهلة التثبيت على برادة المياه</p>
-    </a>
-  </div>
-</section>
-
-<div class="social-bar">
-  <h2>تابعنا عبر</h2>
-  <div class="socials">
-    <a href="https://www.facebook.com/NovaWaterKSA" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/facebook.png" alt="Facebook"></a>
-    <a href="https://www.instagram.com/novawaterksa/" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Instagram.png" alt="Instagram"></a>
-    <a href="https://www.youtube.com/@novawater_ksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Youtube.png" alt="YouTube"></a>
-    <a href="https://x.com/Novawaterksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Twitter.png" alt="X"></a>
-    <a href="https://www.tiktok.com/@novawaterksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/1.png?rand=1721876117" alt="TikTok"></a>
-    <a href="https://www.linkedin.com/company/novawaterksa/" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/2.png?rand=1721876229" alt="LinkedIn"></a>
-    <a href="https://www.snapchat.com/add/novawater.ksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/3.png?rand=1721876229" alt="Snapchat"></a>
-  </div>
-</div>
-
-<footer>
-  <div class="ft-grid">
-    <div class="ft-col">
-      <div class="ft-logo"><img src="https://novacp.novawater.com/media/logo/stores/2/EN_4x.png" alt="نوفا"></div>
-      <div class="ft-contact">
-        <div>9200 33 445</div>
-        <div>info@novawater.com</div>
-        <div style="margin-top:8px">شارع الصحابة, حي المونسية, الرياض 13249</div>
+    <div class="product-card">
+      <div class="product-img">
+        <img src="https://novacp.novawater.com/media/catalog/product/4/0/40x0.33_snd.png" alt="مياه نوفا 330 مل" loading="lazy">
       </div>
-      <div class="ft-apps">
+      <div class="product-info">
+        <div class="product-name">مياه نوفا، كرتون 330 مل، 40 عبوة</div>
+        <div class="product-price"><span class="currency">ر.س</span> 21.84</div>
+        <a href="#order" class="add-to-cart">اطلب الان</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <img src="https://novacp.novawater.com/media/catalog/product/2/4/24_1.jpg" alt="مياه نوفا 200 مل" loading="lazy">
+      </div>
+      <div class="product-info">
+        <div class="product-name">مياه نوفا، كرتون 200 مل، 24 عبوة</div>
+        <div class="product-price"><span class="currency">ر.س</span> 14.46</div>
+        <a href="#order" class="add-to-cart">اطلب الان</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <img src="https://novacp.novawater.com/media/catalog/product/n/o/nova-water_-550ml-case_-24-bottles_1.jpg" alt="مياه نوفا 550 مل" loading="lazy">
+      </div>
+      <div class="product-info">
+        <div class="product-name">مياه نوفا، كرتون 550 مل، 24 عبوة</div>
+        <div class="product-price"><span class="currency">ر.س</span> 18.16</div>
+        <a href="#order" class="add-to-cart">اطلب الان</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <img src="https://novacp.novawater.com/media/catalog/product/g/l/glass_24x250ml00002.png" alt="مياه نوفا زجاج 250 مل" loading="lazy">
+      </div>
+      <div class="product-info">
+        <div class="product-name">مياه نوفا، كرتون 250 مل زجاج، 24 زجاجة</div>
+        <div class="product-price"><span class="currency">ر.س</span> 44.95</div>
+        <a href="#order" class="add-to-cart">اطلب الان</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRODUCT RANGE -->
+<section class="product-range">
+
+  <div class="range-section" style="background: #A0D5F4;">
+    <div class="range-content">
+      <h2>المجموعة الأساسية</h2>
+      <p>والتي تضم جميع الزجاجات البلاستيكية (200 مل، 330 مل، 550 مل، 1.5 لتر، بالإضافة إلى العبوة الرياضية 700 مل وعبوة 330 مل المصنوعة من عبوات معاد تدويرها) عبوات عملية سهلة الفتح متعددة، فردية أو مثالية في الجمعات مع العائلة أو الأصدقاء، حاضرة معكم في تنقلاتكم وأينما كنتم لترويكم.</p>
+      <a href="#order" class="range-btn">اطلب الان</a>
+      <div class="range-features">
+        <img src="https://novacp.novawater.com/media/ar_1_.png" alt="" loading="lazy">
+        <img src="https://novacp.novawater.com/media/ar_2_.png" alt="" loading="lazy">
+        <img src="https://novacp.novawater.com/media/ar_3_.png" alt="" loading="lazy">
+      </div>
+    </div>
+    <div class="range-image">
+      <img src="https://novacp.novawater.com/media/everydayRangeBlue_1.png" alt="المجموعة الأساسية" loading="lazy">
+    </div>
+  </div>
+
+  <div class="range-section" style="background: #C5BCBF;">
+    <div class="range-content">
+      <h2>مياه نوڤا الزجاجية</h2>
+      <p>وتضم عبوة مياه زجاجية سعة 250 مل، وعبوة مياه زجاجية سعة 750 مل. عبوات زجاجية فاخرة ورائعة تعكس بحضورها الرقي والفخامة لتستمتع بشعور استثنائي في كل لحظة تعيشها سواء كنت وحدك أم برفقة أحبابك وأصدقائك.</p>
+      <a href="#order" class="range-btn">اطلب الان</a>
+      <div class="range-features">
+        <img src="https://novacp.novawater.com/media/ar_4_.png" alt="" loading="lazy">
+        <img src="https://novacp.novawater.com/media/ar_5_.png" alt="" loading="lazy">
+        <img src="https://novacp.novawater.com/media/ar_6_.png" alt="" loading="lazy">
+      </div>
+    </div>
+    <div class="range-image">
+      <img src="https://novacp.novawater.com/media/glassStillRange_1.png" alt="مياه نوڤا الزجاجية" loading="lazy">
+    </div>
+  </div>
+
+  <div class="range-section" style="background: #CFAD66;">
+    <div class="range-content">
+      <h2>مجموعة مياه نوڤا الفوارة</h2>
+      <p>تقدم مياه نوڤا تشكيلة من المياه الفوارة، المعبأة في عبوات زجاجية أنيقة بسعة 250 مل و750 مل. كما أطلقت نوڤا حديثًا مجموعة من المياه الفوارة المنكهة بسعة 250 مل، بثلاث نكهات فريدة: ليمون ونعناع، فراولة، وخوخ.</p>
+      <a href="#order" class="range-btn">اطلب الان</a>
+      <div class="range-features">
+        <img src="https://novacp.novawater.com/media/ar_7_.png" alt="" loading="lazy">
+        <img src="https://novacp.novawater.com/media/ar_8_.png" alt="" loading="lazy">
+        <img src="https://novacp.novawater.com/media/ar_9_.png" alt="" loading="lazy">
+      </div>
+    </div>
+    <div class="range-image">
+      <img src="https://novacp.novawater.com/media/ar.png" alt="مجموعة مياه نوڤا الفوارة" loading="lazy">
+    </div>
+  </div>
+
+  <div class="range-section" style="background: #5191CE;">
+    <div class="range-content" style="color: #fff;">
+      <h2 style="color: #fff;">المجموعة الكبيرة</h2>
+      <p style="color: rgba(255,255,255,0.9);">وتضم عبوة بحجم 5 لتر، وعبوة بحجم 12 لتر. عبوات عملية مناسبة للبيت أو المكتب تستخدم لمرة واحدة فقط! يمكن بسهولة تثبيتها على برادة المياه دون الحاجة إلى مجهود كبير.</p>
+      <a href="#order" class="range-btn">اطلب الان</a>
+      <div class="range-features">
+        <img src="https://novacp.novawater.com/media/ar_10_.png" alt="" loading="lazy">
+        <img src="https://novacp.novawater.com/media/ar_11_.png" alt="" loading="lazy">
+        <img src="https://novacp.novawater.com/media/ar_12_.png" alt="" loading="lazy">
+      </div>
+    </div>
+    <div class="range-image">
+      <img src="https://novacp.novawater.com/media/bigFormatRange_1.png" alt="المجموعة الكبيرة" loading="lazy">
+    </div>
+  </div>
+
+</section>
+
+<!-- SUBSCRIBE -->
+<section class="subscribe-section">
+  <div class="subscribe-inner">
+    <div class="subscribe-social">
+      <h3>تابعنا عبر</h3>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/NovaWaterKSA" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/facebook.png" alt="Facebook"></a>
+        <a href="https://www.instagram.com/novawaterksa/" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Instagram.png" alt="Instagram"></a>
+        <a href="https://www.youtube.com/@novawater_ksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Youtube.png" alt="YouTube"></a>
+        <a href="https://x.com/Novawaterksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Twitter.png" alt="X"></a>
+        <a href="https://www.tiktok.com/@novawaterksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/1.png" alt="TikTok"></a>
+        <a href="https://www.linkedin.com/company/novawaterksa/" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/2.png" alt="LinkedIn"></a>
+        <a href="https://www.snapchat.com/add/novawater.ksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/3.png" alt="Snapchat"></a>
+      </div>
+    </div>
+    <div class="subscribe-form">
+      <h3>كن على تواصل</h3>
+      <div class="input-group">
+        <input type="email" placeholder="ادخل البريد الإلكتروني">
+        <button>إرسال</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="footer-logo">
+        <img src="https://novacp.novawater.com/pub/media/cmsblock/images/layer.png" alt="Nova Water">
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>عن نوفا</h4>
+      <ul>
+        <li><a href="javascript:void(0)">معلومات عنا</a></li>
+        <li><a href="javascript:void(0)">الأخبار</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>المنتجات</h4>
+      <ul>
+        <li><a href="javascript:void(0)">المجموعة الأساسية</a></li>
+        <li><a href="javascript:void(0)">مياه نوڤا الزجاجية</a></li>
+        <li><a href="javascript:void(0)">مجموعة مياه نوڤا الفوارة</a></li>
+        <li><a href="javascript:void(0)">المجموعة الكبيرة</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>مركز المساعدة</h4>
+      <ul>
+        <li><a href="javascript:void(0)">الأسئلة الشائعة</a></li>
+        <li><a href="javascript:void(0)">الشروط والأحكام</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>اتصل بنا</h4>
+      <div class="contact-info">
+        <p>شارع الصحابة, حي المونسية, الرياض 13249, المملكة العربية السعودية</p>
+        <p style="direction: ltr; text-align: right; margin-top: 8px;">9200 33 445</p>
+        <p>info@novawater.com</p>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>حافظ على ترطيبك</h4>
+      <p style="font-size: 13px; color: #555; margin-bottom: 12px;">حمّل تطبيق مياه نوڤا اطلب الآن!</p>
+      <div class="app-downloads">
         <a href="https://onelink.to/6pnjf7" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/cmsblock/images/App_Store_1.png" alt="App Store"></a>
         <a href="https://onelink.to/6pnjf7" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/cmsblock/images/Google_Play_1_1.png" alt="Google Play"></a>
         <a href="https://onelink.to/6pnjf7" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/cmsblock/images/AppGallery_1.png" alt="AppGallery"></a>
       </div>
     </div>
-    <div class="ft-col">
-      <h4>عن نوفا</h4>
-      <ul>
-        <li><a href="https://novawater.com/ar/about-us">معلومات عنا</a></li>
-        <li><a href="https://novawater.com/ar/blog">الأخبار</a></li>
-      </ul>
-    </div>
-    <div class="ft-col">
-      <h4>المنتجات</h4>
-      <ul>
-        <li><a href="https://novawater.com/ar/new-products.html">المجموعة الأساسية</a></li>
-        <li><a href="https://novawater.com/ar/new-products.html">مياه نوڤا الزجاجية</a></li>
-        <li><a href="https://novawater.com/ar/new-products.html">مياه نوڤا الفوارة</a></li>
-        <li><a href="https://novawater.com/ar/new-products.html">المجموعة الكبيرة</a></li>
-      </ul>
-    </div>
-    <div class="ft-col">
-      <h4>مركز المساعدة</h4>
-      <ul>
-        <li><a href="https://novawater.com/ar/common-question">الأسئلة الشائعة</a></li>
-        <li><a href="https://novawater.com/ar/terms-conditions">الشروط والأحكام</a></li>
-      </ul>
-    </div>
-    <div class="ft-col">
-      <h4>اتصل بنا</h4>
-      <ul>
-        <li><a href="https://novawater.com/ar/contact-us">أرسل ملاحظاتك</a></li>
-        <li><a href="https://novawater.com/ar/stores">فروعنا</a></li>
-      </ul>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <div class="footer-copyright">© 2026 نوفا. جميع الحقوق محفوظة.</div>
+      <div class="footer-cards">
+        <img src="https://novacp.novawater.com/media/mada_1.jpg" alt="Mada">
+        <img src="https://novacp.novawater.com/media/cmsblock/images/STCPay_logo_1.png" alt="STC Pay">
+        <img src="https://novacp.novawater.com/media/master.jpg" alt="Mastercard">
+        <img src="https://novacp.novawater.com/media/visa.jpg" alt="Visa">
+        <img src="https://novacp.novawater.com/media/applepay.jpg" alt="Apple Pay">
+        <img src="https://novacp.novawater.com/media/cod.jpg" alt="Cash on Delivery">
+      </div>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/NovaWaterKSA" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/facebook.png" alt="Facebook"></a>
+        <a href="https://www.instagram.com/novawaterksa/" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Instagram.png" alt="Instagram"></a>
+        <a href="https://www.youtube.com/@novawater_ksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Youtube.png" alt="YouTube"></a>
+        <a href="https://x.com/Novawaterksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/Twitter.png" alt="X"></a>
+        <a href="https://www.tiktok.com/@novawaterksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/1.png" alt="TikTok"></a>
+        <a href="https://www.linkedin.com/company/novawaterksa/" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/2.png" alt="LinkedIn"></a>
+        <a href="https://www.snapchat.com/add/novawater.ksa" target="_blank" rel="noopener"><img src="https://novacp.novawater.com/media/3.png" alt="Snapchat"></a>
+      </div>
     </div>
   </div>
 </footer>
-<div class="ft-cards">
-  <img src="https://novacp.novawater.com/media/mada_1.jpg" alt="مدى">
-  <img src="https://novacp.novawater.com/media/cmsblock/images/STCPay_logo_1.png" alt="STC Pay">
-  <img src="https://novacp.novawater.com/media/master.jpg" alt="Mastercard">
-  <img src="https://novacp.novawater.com/media/visa.jpg" alt="Visa">
-  <img src="https://novacp.novawater.com/media/applepay.jpg" alt="Apple Pay">
-  <img src="https://novacp.novawater.com/media/cod.jpg" alt="COD">
-</div>
-<div class="ft-bottom">&copy; 2026 نوفا. جميع الحقوق محفوظة.</div>
 
 <script>
-var cur=0;
-function goSlide(n){cur=n;document.getElementById('slides').style.transform='translateX('+(n*50)+'%)';document.querySelectorAll('.dot').forEach(function(d,i){d.className='dot'+(i===n?' active':'');})}
-setInterval(function(){goSlide((cur+1)%2)},5000);
+var current = 0;
+var slides = document.querySelectorAll('.slide');
+var dots = document.querySelectorAll('.dot');
+function goSlide(n) {
+  current = n;
+  document.getElementById('sliderTrack').style.transform = 'translateX(' + (current * 100) + '%)';
+  dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+}
+setInterval(function() { goSlide((current + 1) % slides.length); }, 5000);
 </script>
+
 </body>
 </html>
